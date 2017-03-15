@@ -1,13 +1,8 @@
 class SuperFizzBuzzAlt
   
   def self.sfb(x)
-    fizzbuzz = []
-    fizzbuzz.push(supers(x), fizzes(x), buzzes(x)).compact!
-    if fizzbuzz.empty? 
-      p x 
-    else
-      p fizzbuzz.join
-    end
+    fizzbuzz = Array.new.push(supers(x), fizzes(x), buzzes(x)).compact
+    p fizzbuzz.empty? ? x : fizzbuzz.join
   end
 
   def self.supers(x)
