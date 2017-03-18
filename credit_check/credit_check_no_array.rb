@@ -1,20 +1,36 @@
-require 'pry'
 class CreditCheck
-    attr_accessor :valid, :cc, :check
+    attr_accessor :valid, :card_number, :check_digit
   
   def initialize
     @valid = false
-    @cc = ''
-    @check = ''
+    @card_number
+    @check_digit
   end
   
-  def check_number(cc)
-    cc = cc
-    check = cc[-1]
-    cc.chop!.reverse!
-    iterate_string(cc)
-    cc = cc.reverse! + check
-    valid?(cc)
+  def check_number(card_number)
+    @card_number = card_number
+    @check_digit = card_number[-1]
+    reverse_card_number(card_number)
+    double_every_other(card_number)
+    re_add_check_digit(card_number, check_digit)
+    valid?(card_number)
+  end
+  
+  def reverse_card_number(number)
+    number.chop!.reverse!
+  end
+
+  def double_every_other(string)
+    for i in 0..14
+      double_and_reduce(string, i)
+    end
+  end
+
+  def double_and_reduce(string, i)
+    if i.even?
+      number = double(string, i)
+      check_for_two_digit_number(number, string, i)
+    end
   end
 
   def double(number, index)
@@ -23,15 +39,6 @@ class CreditCheck
 
   def combine_two_digits(string)
     (string[0].to_i + string[1].to_i).to_s
-  end
-  
-  def iterate_string(string)
-    for i in 0..14
-      if i.even?
-        number = double(string, i)
-        check_for_two_digit_number(number, string, i)
-      end
-    end
   end
   
   def check_for_two_digit_number(number, string, index)
@@ -49,10 +56,18 @@ class CreditCheck
     end
     result
   end
+
+  def re_add_check_digit(number, digit)
+    (number.reverse!) << digit
+  end
   
   def valid?(string)
-    combine_string(string) % 10 == 0 ? valid = true : valid = false
-    valid == true ? p("The number is valid!") : p("The number is invalid!")
+    if combine_string(string) % 10 == 0
+      valid = true 
+      p "The number is valid!"
+    else
+      p "The number is invalid!"
+    end
   end
 end
 
