@@ -1,4 +1,4 @@
-require_relative './lib/linked_list'
+require_relative './lib/linked_list_recursion'
 
 class JungleBeat
   attr_accessor :list, :valid_beats, :voice, :rate
@@ -32,6 +32,7 @@ class JungleBeat
   def reset_rate
     @rate = 500
   end
+  
   def play
     `say -r #{rate} -v #{voice} #{list.output}`
   end

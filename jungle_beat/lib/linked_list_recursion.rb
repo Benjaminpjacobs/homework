@@ -1,5 +1,4 @@
 require_relative 'node'
-require 'pry'
 
 class LinkedList
   attr_accessor :head, :count
@@ -53,8 +52,9 @@ class LinkedList
   end
 
   def pop
-    p @head.tail_node.data
+    vestige = @head.tail_node.data
     go_to_node(count-2).next = nil
+    vestige
   end
 
   def count
@@ -100,9 +100,3 @@ class LinkedList
     end
   end
 end
-
-list = LinkedList.new
-list.append("doop")
-list.append("deep")
-list.append("dap")
-list.counter

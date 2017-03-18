@@ -11,13 +11,16 @@ class JungleBeatTest < Minitest::Test
     assert_equal "plop", node.data
     assert_nil node.next
   end
+
   def test_linked_list_exists
     list = LinkedList.new
   end
+
   def test_linked_list_head_default
     list = LinkedList.new
     assert_nil list.head
   end
+
   def test_linked_list_append
     list = LinkedList.new
     assert_equal "doop", list.append("doop")
@@ -28,27 +31,32 @@ class JungleBeatTest < Minitest::Test
     list.append("doop")
     assert_equal "deep", list.append("deep")
   end
+
   def test_list_head_next_node
     list = LinkedList.new
     list.append("doop")
     assert_nil list.head.tail_node.next
   end
+  
   def test_list_count
     list = LinkedList.new
     list.append("doop")
     assert_equal 1, list.count
   end
+
   def test_list_count_two
     list = LinkedList.new
     list.append("doop")
     list.append("deep")
     assert_equal 2, list.count
   end
+
   def test_to_string
     list = LinkedList.new
     list.append("doop")
     assert_equal "doop", list.to_string
   end
+  
   def test_to_string_multiple
     list = LinkedList.new
     list.append("doop")
@@ -58,12 +66,14 @@ class JungleBeatTest < Minitest::Test
     list.append("doo")
     assert_equal "doop deep dap dabba doo", list.to_string
   end
+
   def test_prepend
     list = LinkedList.new
     list.append("doop")
     list.prepend("boop")
     assert_equal "boop", list.head.data
   end
+
   def test_insert
     list = LinkedList.new
     list.append("doop")
@@ -72,6 +82,7 @@ class JungleBeatTest < Minitest::Test
     list.insert(1,"this will be third")
     assert_equal "this will be third", list.head.next.next.data
   end
+
   def test_insert_again
     list = LinkedList.new
     list.append("doop")
@@ -80,6 +91,7 @@ class JungleBeatTest < Minitest::Test
     list.insert(0, "this will be second")
     assert_equal "this will be second", list.head.next.data
   end
+
   def test_find
     list = LinkedList.new
     list.append("doop")
@@ -89,6 +101,7 @@ class JungleBeatTest < Minitest::Test
     list.append("doo")
     assert_equal "deep dap", list.find(1, 2)
   end
+
   def test_include?
     list = LinkedList.new
     list.append("doop")
@@ -99,6 +112,7 @@ class JungleBeatTest < Minitest::Test
     assert list.include?("dabba")
     refute list.include?("elephant")
   end
+
   def test_pop
     list = LinkedList.new
     list.append("doop")
@@ -107,7 +121,7 @@ class JungleBeatTest < Minitest::Test
     list.append("dabba")
     list.append("doo")
     assert_equal 5, list.count
-    assert_nil list.pop
+    assert_equal "doo", list.pop
     assert_equal 4, list.count
     assert_equal "dabba", list.head.tail_node.data
   end
