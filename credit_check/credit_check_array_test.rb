@@ -1,7 +1,7 @@
 gem 'minitest'
 require 'minitest/autorun'
 require 'minitest/pride'
-require_relative 'credit_check_arrays'
+require_relative 'credit_check_array'
 
 class CreditCheckTest < Minitest::Test
 
