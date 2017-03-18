@@ -35,7 +35,7 @@ class JungleBeatTest < Minitest::Test
   def test_linked_list_head_next_node
     list = LinkedList.new
     list.append("doop")
-    assert_nil list.head.tail_node.next
+    assert_nil list.head.tail.next
   end
 
   def test_linked_list_count
@@ -123,7 +123,7 @@ class JungleBeatTest < Minitest::Test
     assert_equal 5, list.count
     assert_equal "doo", list.pop
     assert_equal 4, list.count
-    assert_equal "dabba", list.head.tail_node.data
+    assert_equal "dabba", list.head.tail.data
   end
 
   def test_linked_list_collect_items

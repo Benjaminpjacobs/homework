@@ -6,11 +6,11 @@ class Node
     @next = next_node
   end
   
-  def tail_node
+  def tail
     if self.next.nil?
       return self
     else
-      self.next.tail_node
+      self.next.tail
     end
   end
 end

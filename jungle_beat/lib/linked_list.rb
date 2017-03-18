@@ -12,8 +12,8 @@ class LinkedList
       @head = Node.new(data)
       @head.data   
     else
-      @head.tail_node.next = Node.new(data)
-      @head.tail_node.data
+      @head.tail.next = Node.new(data)
+      @head.tail.data
     end
   end
 
@@ -43,7 +43,7 @@ class LinkedList
   end
 
   def pop
-    vestige = @head.tail_node.data
+    vestige = @head.tail.data
     go_to_node(count-2).next = nil
     vestige
   end
@@ -90,4 +90,3 @@ class LinkedList
     top
   end
 end
-
