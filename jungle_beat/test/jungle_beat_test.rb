@@ -132,8 +132,8 @@ class JungleBeatTest < Minitest::Test
 
   def test_jungle_beat_append
     jb = JungleBeat.new
-    jb.append("tee dee bop")
-    assert_equal "tee", jb.list.head.data
+    assert_equal 3, jb.append("tee dee bop")
+    assert_equal "tee dee bop", jb.list.to_string
   end
 
   def test_jungle_beat_count
@@ -144,9 +144,54 @@ class JungleBeatTest < Minitest::Test
     assert_equal 6, jb.count
   end
 
+  def test_junlge_beat_beats
+    jb = JungleBeat.new
+    jb.append("tee dee bop tee dee bop")
+    expected = `say -r 500 -v boing "tee dee bop tee dee bop"`
+    assert_equal expected, jb.play
+  end
+
   def test_jungle_beat_validation
     jb = JungleBeat.new
     jb.append("tem dee bop")
     assert_equal 2, jb.count
+  end
+
+  def test_change_rate
+    jb = JungleBeat.new
+    jb.append("tee dee bop tee dee bop")
+    jb.rate = 100
+    expected = `say -r 100 -v Boing "tee dee bop tee dee bop"`
+    assert_equal expected, jb.play
+  end
+
+  def test_reset_rate
+    jb = JungleBeat.new
+    jb.append("tee dee bop tee dee bop")
+    jb.rate = 100
+    expected = `say -r 100 -v Boing "tee dee bop tee dee bop"`
+    assert_equal expected, jb.play
+    jb.reset_rate
+    expected = `say -r 500 -v Boing "tee dee bop tee dee bop"`
+    assert_equal expected, jb.play 
+  end
+
+  def test_change_voice
+    jb = JungleBeat.new
+    jb.append("tee dee bop tee dee bop")
+    jb.voice = "Alice"
+    expected = `say -r 500 -v Alice "tee dee bop tee dee bop"`
+    assert_equal expected, jb.play
+  end
+
+  def test_reset_rate
+    jb = JungleBeat.new
+    jb.append("tee dee bop tee dee bop")
+    jb.voice = "Alice"
+    expected = `say -r 500 -v Alice "tee dee bop tee dee bop"`
+    assert_equal expected, jb.play
+    jb.reset_voice
+    expected = `say -r 500 -v Boing "tee dee bop tee dee bop"`
+    assert_equal expected, jb.play 
   end
 end

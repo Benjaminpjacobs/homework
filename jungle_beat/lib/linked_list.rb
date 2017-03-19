@@ -18,66 +18,48 @@ class LinkedList
   end
 
   def find(first, number)
-    output(go_to_node(first), number)
+    to_string(go_to_node(first), number)
   end
 
-  def to_string
-   output(head)
-  end
-
-  def output(start=head, number=count)
-    collect_items(start, number).join(' ')
-  end
-
-  def collect_items(top=head, index=count)
+  def to_string(top=head, index=count)
     array = []
     index.times do
       array << top.data
       top = top.next
     end
-    array
+    array.join(' ')
   end
 
   def include?(value)
-    collect_items.include?(value)
+    to_string.include?(value)
   end
 
   def pop
-    vestige = head.tail.data
+    deleted = head.tail.data
     go_to_node(count-2).next = nil
-    vestige
+    return deleted
   end
 
   def count
-    if head.nil?
-      0
-    else
-      counter
-    end
-  end
-
-  def counter
-   count = 1
+   return 0 if head.nil? 
+   counter = 1
    top = head
    until top.next.nil?
-     count += 1
+     counter += 1
      top = top.next
     end
-    count 
+    return counter 
   end
 
   def prepend(data)
-    temp = Node.new(nil)
-    temp.data = head.data
-    temp.next = head.next
+    temp = Node.new(head.data, head.next)
     @head = Node.new(data, temp)
   end
 
   def insert(position, data)
-    temp = Node.new(data)
-    x = go_to_node(position)
-    temp.next = x.next
-    x.next = temp
+    insert_point = go_to_node(position)
+    temp = Node.new(data, insert_point.next)
+    insert_point.next = temp
   end
 
   def go_to_node(position)

@@ -17,86 +17,54 @@ class LinkedList
     end
   end
 
-  def find(first, number)
-    range_collect_items(go_to_node(first), number)
+  def find(first, number_of_nodes)
+    to_string(go_to_node(first), number_of_nodes)
   end
 
-  def to_string(start=head)
-    collect_items(start).join(' ')
-  end
-
-  def collect_items(node=head,array=[])
-    collected = array
-    if node.next.nil? 
-      collected << node.data
+  def to_string(node=head, number=count, hold_over=[])
+    collection = hold_over
+    if node.next.nil? || collection.length == (number-1)
+      collection << node.data
     else
-      collected << node.data
-      collect_items(node.next, collected)
+      collection << node.data
+      to_string(node.next, number, collection)
     end
-    collected
-  end
-  
-  def range_collect_items(node, number, array=[])
-    collected = array
-    if collected.length == (number-1) || node.next.nil?
-      collected << node.data
-    else
-      collected << node.data
-      range_collect_items(node.next, number, collected)
-    end
-    collected.join(' ')
+    collection.join(' ')
   end
 
   def include?(value)
-    collect_items.include?(value)
+    to_string.include?(value)
   end
 
   def pop
-    vestige = head.tail.data
+    deleted = head.tail.data
     go_to_node(count-2).next = nil
-    vestige
+    return deleted
   end
 
-  def count
-    if @head.nil?
-      0
-    else
-      counter
-    end
-  end
-
-  def counter(node=head, counts=0)
+  def count(node=head, counts=1)
+    return 0 if @head.nil?
     idx = counts
-    if node.next.nil?
-      idx += 1
-      return idx
-    else
-      idx += 1
-      counter(node.next, idx)
-    end
+    return idx if node.next.nil?
+    idx += 1
+    count(node.next, idx)
   end
 
   def prepend(data)
-    temp = Node.new(nil)
-    temp.data = head.data
-    temp.next = head.next
+    temp = Node.new(head.data, head.next)
     @head = Node.new(data, temp)
   end
 
   def insert(position, data)
-    temp = Node.new(data)
-    x = go_to_node(position)
-    temp.next = x.next
-    x.next = temp
+    insert_point = go_to_node(position)
+    temp = Node.new(data, insert_point.next)
+    insert_point.next = temp
   end
 
   def go_to_node(position, node=head, index=0)
     idx = index
-    if idx == position
-      return node
-    else
-      idx += 1
-      go_to_node(position, node.next, idx)
-    end
+    return node if idx == position
+    idx += 1
+    go_to_node(position, node.next, idx)
   end
 end

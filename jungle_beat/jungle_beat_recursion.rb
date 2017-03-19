@@ -3,7 +3,7 @@ require_relative './lib/linked_list_recursion'
 class JungleBeat
   attr_accessor :list, :valid_beats, :voice, :rate
 
-  def initialize
+    def initialize
     @list = LinkedList.new
     @valid_beats = ['tee', 'dee', 'deep', 'bop', 'boop', 'la', 'na']
     @voice = "Boing"
@@ -32,8 +32,7 @@ class JungleBeat
   def reset_rate
     @rate = 500
   end
-  
   def play
-    `say -r #{rate} -v #{voice} #{list.output}`
+    return `say -r #{rate} -v #{voice} #{list.to_string}`
   end
 end

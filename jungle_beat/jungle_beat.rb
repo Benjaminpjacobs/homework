@@ -33,6 +33,6 @@ class JungleBeat
     @rate = 500
   end
   def play
-    `say -r #{rate} -v #{voice} #{list.output}`
+    return `say -r #{rate} -v #{voice} #{list.to_string}`
   end
 end
