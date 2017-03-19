@@ -1,5 +1,5 @@
 class SuperFizzBuzzAlt
-  
+ 
   def self.sfb(x)
     fizzbuzz = Array.new.push(supers(x), fizzes(x), buzzes(x)).compact
     p fizzbuzz.empty? ? x : fizzbuzz.join

@@ -21,9 +21,10 @@ class CreditCheck
   end
 
   def double_every_other(string)
-    for i in 0..14
+    for i in 0..(string.length)
       double_and_reduce(string, i)
     end
+    string
   end
 
   def double_and_reduce(string, i)

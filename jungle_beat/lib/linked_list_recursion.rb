@@ -1,19 +1,19 @@
 require_relative 'node'
 
 class LinkedList
-  attr_accessor :head, :count
+  attr_reader :head
   
   def initialize
     @head = nil
   end
 
   def append(data)
-    if @head.nil?
+    if head.nil?
       @head = Node.new(data)
-      @head.data   
+      head.data   
     else
-      @head.tail.next = Node.new(data)
-      @head.tail.data
+      head.tail.next = Node.new(data)
+      head.tail.data
     end
   end
 
@@ -21,11 +21,11 @@ class LinkedList
     range_collect_items(go_to_node(first), number)
   end
 
-  def to_string(start=@head)
+  def to_string(start=head)
     collect_items(start).join(' ')
   end
 
-  def collect_items(node=@head, array=[])
+  def collect_items(node=head,array=[])
     collected = array
     if node.next.nil? 
       collected << node.data
@@ -42,7 +42,7 @@ class LinkedList
       collected << node.data
     else
       collected << node.data
-     range_collect_items(node.next, number, collected)
+      range_collect_items(node.next, number, collected)
     end
     collected.join(' ')
   end
@@ -52,7 +52,7 @@ class LinkedList
   end
 
   def pop
-    vestige = @head.tail.data
+    vestige = head.tail.data
     go_to_node(count-2).next = nil
     vestige
   end
@@ -65,7 +65,7 @@ class LinkedList
     end
   end
 
-  def counter(node=@head, counts=0)
+  def counter(node=head, counts=0)
     idx = counts
     if node.next.nil?
       idx += 1
@@ -78,8 +78,8 @@ class LinkedList
 
   def prepend(data)
     temp = Node.new(nil)
-    temp.data = @head.data
-    temp.next = @head.next
+    temp.data = head.data
+    temp.next = head.next
     @head = Node.new(data, temp)
   end
 
@@ -90,7 +90,7 @@ class LinkedList
     x.next = temp
   end
 
-  def go_to_node(position, node=@head, index=0)
+  def go_to_node(position, node=head, index=0)
     idx = index
     if idx == position
       return node

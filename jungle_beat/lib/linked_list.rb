@@ -1,19 +1,19 @@
 require_relative 'node'
 
 class LinkedList
-  attr_accessor :head, :count
+  attr_reader :head
   
   def initialize
     @head = nil
   end
 
   def append(data)
-    if @head.nil?
+    if head.nil?
       @head = Node.new(data)
-      @head.data   
+      head.data   
     else
-      @head.tail.next = Node.new(data)
-      @head.tail.data
+      head.tail.next = Node.new(data)
+      head.tail.data
     end
   end
 
@@ -22,14 +22,14 @@ class LinkedList
   end
 
   def to_string
-   output(@head)
+   output(head)
   end
 
-  def output(start=@head, number=count)
+  def output(start=head, number=count)
     collect_items(start, number).join(' ')
   end
 
-  def collect_items(top=@head, index=count)
+  def collect_items(top=head, index=count)
     array = []
     index.times do
       array << top.data
@@ -43,13 +43,13 @@ class LinkedList
   end
 
   def pop
-    vestige = @head.tail.data
+    vestige = head.tail.data
     go_to_node(count-2).next = nil
     vestige
   end
 
   def count
-    if @head.nil?
+    if head.nil?
       0
     else
       counter
@@ -58,7 +58,7 @@ class LinkedList
 
   def counter
    count = 1
-   top = @head
+   top = head
    until top.next.nil?
      count += 1
      top = top.next
@@ -68,8 +68,8 @@ class LinkedList
 
   def prepend(data)
     temp = Node.new(nil)
-    temp.data = @head.data
-    temp.next = @head.next
+    temp.data = head.data
+    temp.next = head.next
     @head = Node.new(data, temp)
   end
 
