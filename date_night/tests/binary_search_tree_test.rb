@@ -36,5 +36,18 @@ class BinarySearchTreeTest < Minitest::Test
     assert_equal tree.root.left.right.data, {50 => "Hannibal Buress: Animal Furnace"}
     assert_nil tree.root.left.left
   end
+  def test_include?
+    tree = BinarySearchTree.new
+    tree.insert(61, "Bill & Ted's Excellent Adventure")
+    tree.insert(16, "Johnny English")
+    tree.insert(92, "Sharknado 3")
+    tree.insert(50, "Hannibal Buress: Animal Furnace") 
+    tree.insert(55, "This movie doesn't matter")
+    assert tree.include?(16)
+    assert tree.include?(50)
+    refute tree.include?(72)
+    assert tree.include?(55)
+
+  end
 
 end

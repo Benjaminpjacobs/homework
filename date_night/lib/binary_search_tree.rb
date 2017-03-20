@@ -32,4 +32,16 @@ class BinarySearchTree
       find_next_node(data, node.right, depth)
     end
   end
+  def include?(rating, node=root)
+    # binding.pry
+    return false if node.nil?
+    return true if node.data.keys[0] == rating
+
+    if rating > node.data.keys[0]
+      include?(rating, node.right)
+    elsif
+      rating < node.data.keys[0]
+      include?(rating, node.left)
+    end
+  end
 end
