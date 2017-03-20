@@ -1,27 +1,20 @@
 class CreditCheck
-    attr_accessor :valid, :number_arr, :check_digit
-    
-  def initialize
-    @valid = false
-    @number_arr = []
-    @check_digit = nil
-  end
 
   def check_number(cc_number)
-    split_number_into_array(cc_number)
-    store_check_digit(number_arr)
-    double_numbers(number_arr)
-    check_for_two_digit_numbers(number_arr)
-    re_add_check_number(number_arr, check_digit)
-    valid?(number_arr, check_digit)
+    number_array = split_number_into_array(cc_number)
+    check_digit = store_check_digit(number_array)
+    doubled_numbers = double_numbers(number_array)
+    reduced_numbers = check_for_two_digit_numbers(doubled_numbers)
+    number_to_check = re_add_check_number(reduced_numbers, check_digit)
+    valid?(number_to_check)
   end
 
   def split_number_into_array(card_number)
-    @number_arr = card_number.split('')
+    card_number.split('')
   end
 
   def store_check_digit(number_array)
-    @check_digit = number_arr.pop.to_i 
+    number_array.pop.to_i 
   end
 
   def double_numbers(array)
@@ -72,9 +65,8 @@ class CreditCheck
     number_arr << check_digit
   end
   
-  def valid?(number_array, check_digit)  
+  def valid?(number_array)  
     if number_array.reduce(&:+) % 10 == 0  
-      @valid = true
       p "The number is valid!"
     else
       p "The number is invalid!"

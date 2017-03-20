@@ -15,14 +15,6 @@ class CreditCheckTest < Minitest::Test
     expected = ["5","5","4","1","8","0","8","9"]
     assert_equal expected, checker.split_number_into_array(input)
   end
-
-  def test_store_check_digit
-    checker = CreditCheck.new
-    input = "55418089"
-    expected = 9
-    checker.split_number_into_array(input)
-    assert_equal expected, checker.store_check_digit(input)
-  end
   
   def test_double_numbers
     checker = CreditCheck.new
