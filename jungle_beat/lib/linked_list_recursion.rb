@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'node'
 
 class LinkedList
@@ -32,8 +33,14 @@ class LinkedList
     collection.join(' ')
   end
 
-  def include?(value)
-    to_string.include?(value)
+  def include?(node=head, value)
+    if node.next.nil?
+      found = (node.data == value)
+    else
+      found = (node.data == value)
+      return found if found == true
+      include?(node.next, value)
+    end
   end
 
   def pop
