@@ -15,9 +15,9 @@ class BinarySearchTree
       find_next_node({rating=>title})
     end
   end
-  def find_next_node(data, node=root, level = 1 )
+  def find_next_node(data, node=root, depth = 1 )
     # binding.pry
-    depth = level
+    level = depth
     if node.data.keys[0] > data.keys[0] && node.left.nil?
       node.left = Node.new(data)
       return depth
@@ -25,11 +25,11 @@ class BinarySearchTree
       node.right = Node.new(data)
       return depth
     elsif node.data.keys[0] > data.keys[0]
-      depth += 1
-      find_next_node(data, node.left, depth)
+      level += 1
+      find_next_node(data, node.left, level)
     else
-      depth += 1
-      find_next_node(data, node.right, depth)
+      level += 1
+      find_next_node(data, node.right, level)
     end
   end
   def include?(rating, node=root)
@@ -42,6 +42,20 @@ class BinarySearchTree
     elsif
       rating < node.data.keys[0]
       include?(rating, node.left)
+    end
+  end
+
+  def depth_of(value, node=root, depth=0)
+    level = depth
+    return nil if node.nil?
+    return level if node.data.keys[0] == value
+    
+    if node.data.keys[0] > value
+      level += 1
+      depth_of(value, node.left, level)
+    else
+      level += 1
+      depth_of(value, node.right, level)
     end
   end
 end
