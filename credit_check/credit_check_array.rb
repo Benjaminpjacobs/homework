@@ -1,4 +1,3 @@
-require 'pry'
 class CreditCheck
     attr_accessor :valid, :number_arr, :check_digit
     
